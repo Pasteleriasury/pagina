@@ -1,0 +1,288 @@
+{% extends 'base.html' %}
+
+{% block title %} {{nombre}} | Index {% endblock %}
+
+{% block content %}
+
+<style>
+    @keyframes latir{
+        0%{
+            transform: scale(1);
+        }
+        50%{
+            transform: scale(1.1);
+        }
+        100%{
+            transform: scale(1);
+        }
+    }
+    .inicio{
+        padding: 0;
+        box-sizing: border-box;
+        width: 100%;
+        height: 85vh;
+        background: linear-gradient(rgba(20, 20, 20, 0.25), rgba(20, 20, 20, 0.25)),
+                  url("https://scontent.fmex1-5.fna.fbcdn.net/v/t39.30808-6/304076403_496165619184163_8818822575190682486_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=5f2048&_nc_ohc=Pl9ogjn8x80AX_znqWX&_nc_ht=scontent.fmex1-5.fna&oh=00_AfDA8olwzpa8K1qV_cYklIYpjO7-MJ7oi4qvL9b9es3STg&oe=656164AF");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 50%;
+    }
+    .inicio .imagen{
+        width: 15%;
+        margin: 0 auto;
+        position: relative;
+        top: 25%;
+        animation: latir 1s infinite;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 25%;
+    }
+    .inicio img{
+        padding: 5px;
+        width: 100%;
+        border-radius: 25%;
+        box-shadow: 0px 0px 100px 10px white;
+    }
+    .boton{
+        position: relative;
+        margin: 0 auto;
+        width: 20%;
+        left: 5%;
+        top: 40%;
+    }
+
+    .nosotros{
+        display: flex;
+        min-height: 50vh;
+    }
+    .nosotros .n h1{
+        position: relative;
+        top: 50%;
+    }
+    .nosotros p{
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    .productos{
+        margin: 8vh 0 0 0;
+        min-height: 95vh;
+    }
+
+    .imagen-producto{
+        width: 200px;
+    }
+    .imagen-producto img{
+        width: 95%;
+    }
+
+    .contacto{
+        display: flex;
+        min-height: 50vh;
+        flex-direction: row-reverse;
+    }
+    .contacto .imagen{
+        width: 150px;
+        position: relative;
+        left: 35%;
+    }
+    .contacto .imagen img{
+        width: 100%;
+    }
+    .contacto .n h1{
+        position: relative;
+        top: 50%;
+    }
+
+    .ubicacion{
+        min-height: 50vh;
+    }
+
+    .posts{
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+    .post iframe{
+        width: 100%;
+        height: 100vh;
+    }
+
+    @media(max-width: 600px){
+        .inicio{
+            margin: 0;
+            background-size:auto;
+            background-position-y: 100%;
+        }
+        .nosotros, .productos, .contacto, .ubicacion, .posts{
+            margin: 0;
+            min-height: 100%;
+            margin: 0;
+        }
+        .inicio .imagen{
+            margin: 0;
+            width: 50%;
+            margin: 0 auto;
+            position: relative;
+            top: 25%;
+            animation: latir 1s infinite;
+        }
+        .inicio img{
+            width: 100%;
+            border-radius: 25%;
+            box-shadow: 0px 0px 100px 10px white;
+        }
+        .boton{
+            position: relative;
+            margin: 0 auto;
+            width: 45%;
+            left: 3%;
+            top: 50%;
+        }
+        .contacto .imagen{
+            left: 25%;
+        }
+        .nosotros, .contacto{
+            display: block;
+        }
+        .posts{
+            flex-direction: column;
+            gap: 0;
+        }
+    }
+</style>
+
+<section class="inicio mb-5">
+    <article class="imagen">
+        <img src="{{logo}}" alt="">
+    </article>
+    <article class="boton">
+        <a class="btn btn-lg btn-outline-light" href="#productos">Ver productos</a>
+    </article>
+</section>
+
+<section class="nosotros container mb-5" id="Nosotros">
+    <article class="col-md-6 n">
+        <h1 class="text-center">Nosotros</h1>
+        <hr>
+    </article>
+    <article class="card card-body col-md-6 p-3">
+        <p>
+            {{descripcion | safe}}
+        </p>
+    </article>
+</section>
+
+<section class="productos container m-auto" id="productos">
+    <h1 class="text-center">Productos</h1>
+    <hr>
+    <section class="categorias mb-2">
+        <p class="d-inline-flex gap-1">
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+              Categorias
+            </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            <p>Insertar en el buscador de productos:</p>
+            <hr>
+            <ul>
+                {% for categoria in categorias %}
+                <li>{{categoria.categoria}}</li>
+                {% endfor %}
+            </ul>
+          </div>
+        </div>
+    </section>
+    <table class="table table-striped" id="Productos">
+        <thead>
+            <th>Imagen</th>
+            <th>Producto</th>
+            <th>Precio ($)</th>
+            <th>Categoría</th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td class="imagen-producto">
+                    <img src="{{producto.imagen}}" alt="Imagen {{producto.nombre}}">
+                </td>
+                <td>{{producto.nombre}}</td>
+                <td>{{producto.precio}}</td>
+                <td>{{producto.categoria}}</td>
+                <td>
+                    <a class="btn btn-primary m-3" href="{% url 'Detail_product' producto.id %}">
+                        <i class="fa-regular fa-eye" style="color: #ffffff;"></i> Detalle
+                    </a>
+                    <a class="btn btn-success" href="https://wa.me/{{whatsapp}}?text=Hola,%20Me%20gustaria%20comprar%20un%20{{producto.nombre}}%20que%20vi%20en%20tu%20pagina%20web">
+                        Comprar <i class="fa-brands fa-whatsapp" style="color: #ffffff;"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<section class="contacto container mb-5" id="Contacto">
+    <article class="col-md-6 n">
+        <h1 class="text-center">Contacto</h1>
+    </article>
+    <article class="card col-md-6 p-3">
+        <section class="card-header">
+            <h3>{{nombre}}</h3>
+        </section>
+        <section class="card-body">
+            <section class="imagen">
+                <img class="mb-5" src="{{logo}}" alt="">
+            </section>
+            <p class="mb-5"> <i class="fa-brands fa-square-whatsapp fa-2xl" style="color: #26a269;"></i> {{whatsapp}}</p>
+            {% if email %}
+            <p class="mb-5"> <i class="fa-solid fa-envelope fa-2xl" style="color: #a51d2d;"></i> {{email}}</p>
+            {% endif %}
+            {% if direccion %}
+            <p class="mb-5"> <i class="fa-solid fa-map-location-dot fa-2xl" style="color: #1a5fb4;"></i> {{direccion}}</p>
+            {% endif %}
+        </section>
+        <section class="footer">
+            <a class="btn btn-success w-100" href="https://wa.me/{{whatsapp}}?text=Hola,%20acabo%20de%20visitar%20tu%20pagina%20web,%20me%20gustaría%20obtener%20más%20información">
+                Whatsapp <i class="fa-brands fa-whatsapp" style="color: #ffffff;"></i>
+            </a>
+        </section>
+    </article>
+</section>
+
+{% if direccion %}
+<section class="ubicacion container" id="Ubicacion">
+    <h1 class="text-center">Ubicación</h1>
+    <hr>
+    <article class="col-md-12">
+        <div style="width: 100%">
+            <iframe 
+            width="100%" 
+            height="350" 
+            frameborder="0" 
+            scrolling="no" 
+            marginheight="0" 
+            marginwidth="0" 
+            src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q={{direccion}}+({{nombre}})&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+                <a href="https://www.gps.ie/sport-gps/">gps watches</a>
+            </iframe>
+        </div>
+    </article>
+</section>
+{% endif %}
+
+<section class="container trabajo" id="Post">
+    <h1 class="text-center">Nuestro trabajo</h1>
+    <hr>
+    <section class="posts">
+        {% for post in posts %}
+        <article class="post col-md-6">
+            {{post.body | safe}}
+        </article>
+        {% endfor %}
+    </section>
+</section>
+
+{% endblock %}

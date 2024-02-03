@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="shortcut icon" href="{{logo}}" type="image/x-icon">
+
+    <!--JS-->
+    <script type="module" src="{% static 'js/main.js' %}"></script>
+
+    <!--Bootstrap5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!--Datatables-->
+    <link href="https//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link href="https://cdn.datatables.net/v/bs5/dt-1.13.6/r-2.5.0/datatables.min.css" rel="stylesheet">
+
+</head>
+<style>
+    @keyframes latir{
+        0%{
+            transform: scale(1);
+        }
+        50%{
+            transform: scale(1.1);
+        }
+        100%{
+            transform: scale(1);
+        }
+    }
+    main{
+          background-color: #fdcae1;
+    }
+    h1, hr{
+        color: white;
+    }
+    .navbar{
+      background-color: #fdcae1;
+    }
+    .footer{
+      background-color: #fa80b7;
+    }
+    .logo{
+      width: 25px;
+    }
+    .logo img{
+      width: 100%;
+    }
+    .navbar-brand{
+      font-weight: bold;
+      color: white;
+    }
+    .whatsaap{
+      font-size: 3rem;
+      position: fixed;
+      right: 5%;
+      z-index: 1;
+      animation: latir 1s infinite;
+    }
+</style>
+<body>
+    <main class="">
+      <nav class="navbar navbar-expand-lg w-100">
+        <div class="container-fluid">
+          <section class="logo">
+            <img src="{{logo}}" alt="">
+          </section>
+          <a class="navbar-brand px-2" href="/">{{nombre}}</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon" style="color: #fff;"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#Nosotros">Nosotros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#productos">Productos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#Post">Nuestro trabajo</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#Contacto">Contacto</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#Ubicacion">Ubicacion</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <section class="whatsaap">
+        <a class="" href="https://wa.me/{{whatsapp}}?text=Hola,%20acabo%20de%20visitar%20tu%20pagina%20web,%20me%20gustaría%20obtener%20más%20información">
+          <i class="fa-brands fa-whatsapp" style="color: #26a269;"></i>
+        </a>
+      </section>
+        {% block content %}
+        
+        {% endblock %}
+
+        <footer class="footer p-5 w-100 text-white text-center">
+          <p>© {{nombre}} 2024</p>
+          <p>by. ArmandoTech</p>
+        </footer>
+    </main>
+
+    <!--Bootstrap5-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <!--Fontawesome-->
+    <script src="https://kit.fontawesome.com/b8c2cb1ed2.js" crossorigin="anonymous"></script>
+
+    <!--jQuery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!--Datatables-->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/r-2.5.0/datatables.min.js"></script>
+</body>
+</html>

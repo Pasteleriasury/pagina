@@ -1,0 +1,13 @@
+asgiref
+Brotli
+dj-database-url
+Django
+django-ckeditor
+django-jazzmin
+django-js-asset
+gunicorn
+packaging
+psycopg2-binary
+sqlparse
+typing_extensions
+whitenoise
